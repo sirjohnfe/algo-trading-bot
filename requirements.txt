@@ -1,0 +1,13 @@
+numpy
+pandas
+yfinance
+statsmodels
+scipy
+matplotlib
+termcolor
+alpaca-py
+python-dotenv
+streamlit
+plotly
+lxml
+html5lib
