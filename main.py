@@ -40,7 +40,7 @@ def main():
         return
         
     # 4. Mode Selection
-    mode = "optimize" # Options: "backtest", "paper_trade", "scheduled", "optimize"
+    mode = "scheduled" # Options: "backtest", "paper_trade", "scheduled", "optimize"
     
     if mode == "backtest":
         backtester = Backtester()
