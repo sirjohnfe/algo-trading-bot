@@ -73,9 +73,32 @@ class Scheduler:
                     logger.info(f"SIGNAL DETECTED: {pair['y']}-{pair['x']} Z={last_z:.2f}")
                     # Execution Logic here
                     if self.trader:
-                        # Logic to check current positions before opening new ones
-                        # For now, just logging
-                        pass
+                        # Execution Logic
+                        # 1. Check if we already have a position
+                        # (Simplistic check: ensure we don't spam orders. 
+                        # Ideally strategies check self.trader.get_positions())
+                        
+                        # 2. Calculate Size (Fixed $10k per leg for Paper)
+                        target_exposure = 10000 
+                        
+                        # Get latest prices
+                        price_y = self.strategy.data[pair['y']].iloc[-1]
+                        price_x = self.strategy.data[pair['x']].iloc[-1]
+                        
+                        qty_y = int(target_exposure / price_y)
+                        qty_x = int((target_exposure * pair['hedge_ratio']) / price_x)
+                        
+                        logger.info(f"Executing Trade: {pair['y']} vs {pair['x']}")
+                        
+                        if last_z < -2.0:
+                            # Long Spread: Buy Y, Sell X
+                            self.trader.submit_order(pair['y'], 'buy', qty_y)
+                            self.trader.submit_order(pair['x'], 'sell', qty_x)
+                            
+                        elif last_z > 2.0:
+                            # Short Spread: Sell Y, Buy X
+                            self.trader.submit_order(pair['y'], 'sell', qty_y)
+                            self.trader.submit_order(pair['x'], 'buy', qty_x)
             except Exception as e:
                 logger.error(f"Error scanning pair {pair}: {e}")
                 
