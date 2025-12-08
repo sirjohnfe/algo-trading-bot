@@ -73,11 +73,12 @@ class Scheduler:
                     logger.info(f"SIGNAL DETECTED: {pair['y']}-{pair['x']} Z={last_z:.2f}")
                     # Execution Logic here
                     if self.trader:
-                        # Execution Logic
                         # 1. Check if we already have a position
-                        # (Simplistic check: ensure we don't spam orders. 
-                        # Ideally strategies check self.trader.get_positions())
-                        
+                        current_positions = [p.symbol for p in self.trader.get_positions()]
+                        if pair['y'] in current_positions or pair['x'] in current_positions:
+                            logger.info(f"Skipping {pair['y']}-{pair['x']} (Already in position)")
+                            continue
+
                         # 2. Calculate Size (Fixed $10k per leg for Paper)
                         target_exposure = 10000 
                         
