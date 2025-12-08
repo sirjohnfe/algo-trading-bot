@@ -17,16 +17,15 @@ def main():
     logger.info("Starting Advanced Quant System...")
     
     # 1. Define Universe
-    # Use S&P 500 but limit to top 50 for initial speed/API limits check
+    # Use S&P 500. Limit to 100 for balance between coverage and speed.
+    # 50 tickers = 1,225 pairs. 100 tickers = 4,950 pairs. 500 tickers = 124,750 pairs (too slow for single thread).
     full_sp500 = get_sp500_tickers()
     logger.info(f"Loaded {len(full_sp500)} tickers from S&P 500.")
     
-    tickers = full_sp500[:50] # Top 50 by alphabetical (approx random sector mix if wiki sort)
-    # Note: Wiki is sorted by Symbol A-Z. 
-    # Better: Top 50.
+    tickers = full_sp500[:100] # Expanded to Top 100
     
-    
-    start_date = "2023-01-01"
+    # Expanded Date Range (3 Years for robustness)
+    start_date = "2021-01-01"
     end_date = "2024-01-01"
     
     # 2. Initialize Strategy

@@ -28,5 +28,16 @@ def get_sp500_tickers() -> list:
         return tickers
     except Exception as e:
         print(f"Failed to scrape S&P 500: {e}")
-        # Fallback list of top 50 if scrape fails
-        return ["AAPL", "MSFT", "GOOG", "AMZN", "NVDA", "TSLA", "META", "BRK.B", "UNH", "JNJ"]
+        # Fallback to hardcoded list if scraping fails
+        # Expanded to ~100 major S&P 500 tickers across sectors
+        return [
+            "AAPL", "MSFT", "GOOG", "AMZN", "NVDA", "TSLA", "META", "BRK.B", "UNH", "JNJ", 
+            "XOM", "JPM", "V", "PG", "LLY", "MA", "HD", "CVX", "MRK", "ABBV", 
+            "PEP", "KO", "ORCL", "BAC", "COST", "MCD", "CSCO", "CRM", "ACN", "ADBE",
+            "LIN", "TMO", "AMD", "NFLX", "WMT", "DHR", "DIS", "TXN", "WFC", "PM", 
+            "CAT", "INTU", "COP", "QCOM", "IBM", "BA", "GE", "AMGN", "HON", "UNP",
+            "LOW", "SPGI", "RTX", "INTC", "GS", "EL", "PLD", "SBUX", "DE", "MS",
+            "BLK", "T", "CVS", "LMT", "GILD", "AXP", "SYK", "BKNG", "MDLZ", "TJX",
+            "ISRG", "ADI", "C", "MMC", "VRTX", "MDT", "ADP", "LRCX", "TMUS", "TGT",
+            "MO", "GM", "F", "SLB", "EOG", "Oxy", "PFE", "BDX", "BSX", "USB"
+        ]
