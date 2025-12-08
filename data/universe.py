@@ -41,3 +41,4 @@ def get_sp500_tickers() -> list:
             "ISRG", "ADI", "C", "MMC", "VRTX", "MDT", "ADP", "LRCX", "TMUS", "TGT",
             "MO", "GM", "F", "SLB", "EOG", "Oxy", "PFE", "BDX", "BSX", "USB"
         ]
+        # Forced Update v2
